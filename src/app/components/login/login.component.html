@@ -1,0 +1,26 @@
+<div class="login-container" *ngIf="loginForm">
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h1 class="form-title">Log In</h1>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" placeholder="Email" class="form-control">
+            <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error-message">
+              Correo electrónico no válido.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" placeholder="Password" class="form-control">
+            <div *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched" class="error-message">
+              La contraseña debe tener al menos 8 caracteres.
+            </div>
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        <div *ngIf="loginForm.valid && submitted" class="success-message">
+          Los campos son válidos.
+        </div>
+        <div *ngIf="!loginForm.valid && submitted" class="error-message">
+          Los campos no son válidos.
+        </div>
+    </form>
+</div>
